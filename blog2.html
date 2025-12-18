@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Journal | Slim UI</title>
+    <style>
+        :root {
+            --neon-green: #00E676;
+            --true-black: #0A0A0A;
+            --card-bg: #1A1A1A;
+            --text-white: #E0E0E0;
+            --text-gray: #9E9E9E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: var(--true-black);
+            color: var(--text-white);
+        }
+
+        /* Slim Header: Exactly 10% of screen height */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 10vh; /* 10% of the viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid var(--neon-green);
+        }
+
+        .hero h1 { 
+            font-size: 1.5rem; /* Smaller font to fit the slim header */
+            color: var(--neon-green);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .widget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* Widget Styling */
+        .post-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .post-widget {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 4px;
+            border-left: 3px solid var(--neon-green);
+            transition: all 0.3s ease;
+            height: 180px; /* Made widgets slightly smaller to match slim header */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .post-widget:hover {
+            background: #252525;
+            transform: translateX(5px);
+        }
+
+        .widget-tag {
+            font-size: 0.7rem;
+            color: var(--neon-green);
+            font-weight: bold;
+        }
+
+        .post-widget h3 {
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+
+        .check-btn {
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .post-widget:hover .check-btn {
+            background: var(--neon-green);
+            color: var(--true-black);
+        }
+
+        .widget-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .date-text {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>System_Archive</h1>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="widget-grid" id="widget-container">
+            </div>
+    </div>
+
+    <script>
+        const blogData = [
+            { category: "Security", title: "Encrypted Communication", date: "2025.12.18", url: "./1.html" },
+            { category: "Code", title: "JS Engine Optimization", date: "2025.12.15", url: "#" },
+            { category: "Network", title: "Mesh Network Trends", date: "2025.12.10", url: "#" },
+            { category: "AI", title: "Neural Architecture", date: "2025.12.08", url: "#" },
+            { category: "Cloud", title: "Serverless Scaling", date: "2025.12.05", url: "#" },
+            { category: "Data", title: "Vector Databases", date: "2025.12.01", url: "#" }
+        ];
+
+        function renderWidgets() {
+            const container = document.getElementById('widget-container');
+            container.innerHTML = blogData.map(post => `
+                <a href="${post.url}" class="post-link">
+                    <div class="post-widget">
+                        <div>
+                            <div class="widget-tag">${post.category}</div>
+                            <h3>${post.title}</h3>
+                        </div>
+                        <div class="widget-footer">
+                            <span class="date-text">${post.date}</span>
+                            <span class="check-btn">Check</span>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        window.onload = renderWidgets;
+    </script>
+</body>
+</html>
